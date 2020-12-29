@@ -12,9 +12,14 @@ Code for Tidyverse & Data Visualization Practice
 * **ggplot2** - https://www.r-graph-gallery.com/ggplot2-package.html
 #### Books (Bookdown version)
 * **Fundamentals of Data Visualization** - https://clauswilke.com/dataviz/
+* **R Graphics Cookbook, 2nd edition** - https://r-graphics.org/
+* **Cookbook for R. Graphs with ggplot2** - http://www.cookbook-r.com/Graphs/
+* **R graphics with ggplot2 workshop notes** http://rstudio-pubs-static.s3.amazonaws.com/471711_1239c7ba82bd47e09d6dedf1403fe9af.html
 * **Data Visualization. A practical introduction** - https://socviz.co/index.html#preface
 * **Data Visualization with R** - https://rkabacoff.github.io/datavis/
-* **R for Data Science** - https://r4ds.had.co.nz/data-visualisation.html
+* **R for Data Science** - https://r4ds.had.co.nz/
+* **Statistical Inference via Data Science. A ModernDive into R and the tidyverse** - https://moderndive.com/index.html
+* **Interactive web-based data visualization with R, plotly, and shiny** - https://plotly-r.com/index.html
 #### Websites
 * **The R Graph Gallery** - https://www.r-graph-gallery.com/index.html
 #### Webinars
