@@ -8,13 +8,18 @@ Code for Tidyverse & Data Visualization Practice
 
 ### Sources
 #### Books (Bookdown version)
+* **Fundamentals of Data Visualization** - https://clauswilke.com/dataviz/
 * **Data Visualization. A practical introduction** - https://socviz.co/index.html#preface
 * **Data Visualization with R** - https://rkabacoff.github.io/datavis/
 * **R for Data Science** - https://r4ds.had.co.nz/data-visualisation.html
 #### Websites
 * **The R Graph Gallery** - https://www.r-graph-gallery.com/index.html
-#### Webinars
-* **Plotting anything with ggplot2** - https://github.com/thomasp85/ggplot2_workshop
+## Webinars
+* **Plotting anything with ggplot2** - 
+    + ggplot2 workshop part 1 - https://www.youtube.com/watch?v=h29g21z0a68 
+    + ggplot2 workshop part 2 - https://www.youtube.com/watch?v=0m4yywqNPVY
+    + thomasp85/ggplot2_workshop - https://github.com/thomasp85/ggplot2_workshop
+##
 #### ggplot2 package
 * **ggplot2** - https://ggplot2.tidyverse.org/index.html
 * **ggplot2** - https://www.r-graph-gallery.com/ggplot2-package.html
