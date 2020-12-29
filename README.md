@@ -16,9 +16,9 @@ Code for Tidyverse & Data Visualization Practice
 * **ggplot2** - https://www.r-graph-gallery.com/ggplot2-package.html
 
 ## Strategy
-1. EDA: Analyze dataset structure, variables distribution and anomalies  
-2. Create chart/dashboard
-3. Publish charts/dashboards to:
-+ blog (
-+ twitter
-+ Rpubs
+1. EDA: Analyze the dataset structure, variables distribution and anomalies  
+2. Create visualizations/dashboard
+3. Publish visualizations/dashboard to:
+  + blog (https://rdocks.netlify.app/)
+  + twitter
+  + Rpubs
