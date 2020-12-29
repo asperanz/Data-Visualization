@@ -16,6 +16,15 @@ Code for Tidyverse & Data Visualization Practice
 * **ggplot2** - https://www.r-graph-gallery.com/ggplot2-package.html
 
 ## Strategy
+Analyses are divided by:
+    * By books & bookdowns
+    * By datasets
+    * By graph types
+    * By tutorials & webinars
+
+**IMPORTANT!** Use windows file system tagging to retrieve the code. 
+
+## Publishing
 1. EDA: Analyze the dataset structure, variables distribution and anomalies  
 2. Create visualizations/dashboard
 3. Publish visualizations/dashboard to:
@@ -23,4 +32,4 @@ Code for Tidyverse & Data Visualization Practice
     + twitter
     + Rpubs
 
-**IMPORTANT!** Use file system tagging to look for info
+
