@@ -16,7 +16,7 @@ Code for Tidyverse & Data Visualization Practice
 * **ggplot2** - https://www.r-graph-gallery.com/ggplot2-package.html
 
 ## Strategy
-Analyses are divided by:
+Analyses are divided by:  
     * By books & bookdowns
     * By datasets
     * By graph types
