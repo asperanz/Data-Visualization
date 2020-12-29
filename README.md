@@ -16,11 +16,11 @@ Code for Tidyverse & Data Visualization Practice
 * **ggplot2** - https://www.r-graph-gallery.com/ggplot2-package.html
 
 ## Strategy
-Analyses are divided  
-* By books & bookdowns
-* By datasets
-* By graph types
-* By tutorials & webinars
+Analyses are divided by:  
+* books & bookdowns
+* datasets
+* graph types
+* tutorials & webinars
 
 **IMPORTANT!** Use windows file system tagging to retrieve the code. 
 
