@@ -22,3 +22,5 @@ Code for Tidyverse & Data Visualization Practice
     + blog (https://rdocks.netlify.app/)
     + twitter
     + Rpubs
+
+**IMPORTANT!** Use file system tagging to look for info
