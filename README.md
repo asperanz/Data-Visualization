@@ -18,7 +18,7 @@ Code for Tidyverse & Data Visualization Practice
 #### Websites
 * **The R Graph Gallery** - https://www.r-graph-gallery.com/index.html
 #### Webinars
-* **Plotting anything with ggplot2** - 
+* **Plotting anything with ggplot2**
     + ggplot2 workshop part 1 - https://www.youtube.com/watch?v=h29g21z0a68 
     + ggplot2 workshop part 2 - https://www.youtube.com/watch?v=0m4yywqNPVY
     + thomasp85/ggplot2_workshop - https://github.com/thomasp85/ggplot2_workshop
