@@ -22,12 +22,14 @@ Analyses are divided by:
 * graph types
 * tutorials & webinars
 
+1. EDA: Analyze the dataset structure, variables distribution and anomalies  
+2. Create visualizations/dashboard
+3. Publish the visualizations/dashboard
+
 **IMPORTANT!** Use windows file system tagging to retrieve the code. 
 
 ## Publishing
-1. EDA: Analyze the dataset structure, variables distribution and anomalies  
-2. Create visualizations/dashboard
-3. Publish visualizations/dashboard to:
+1. Publish visualizations/dashboard to:
     + blog (https://rdocks.netlify.app/)
     + twitter
     + Rpubs
