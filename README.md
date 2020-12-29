@@ -19,6 +19,6 @@ Code for Tidyverse & Data Visualization Practice
 1. EDA: Analyze the dataset structure, variables distribution and anomalies  
 2. Create visualizations/dashboard
 3. Publish visualizations/dashboard to:
-  + blog (https://rdocks.netlify.app/)
-  + twitter
-  + Rpubs
+    + blog (https://rdocks.netlify.app/)
+    + twitter
+    + Rpubs
