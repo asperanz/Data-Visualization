@@ -1,0 +1,69 @@
+---
+title: "ggplot2 Workshop - AS"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+library(funModeling)
+library(ggplot2)
+#library(ggrepel)
+#library(patchwork)
+#library(ggraph)
+#library(dplyr)
+#library(gganimate)
+#library(gifski)
+#library(ggforce)
+#library(ggthemes)
+#library(maps)
+#library(sf)
+#library(tidyr)
+#library(concaveman)
+#library(remotes)
+```
+
+# faithful dataset
+## EDA
+```{r}
+df_status(faithful)
+summary(faithful)
+
+faithful <- faithful
+```
+## Correlation - geom_point()
+
+```{r}
+# global definition
+ggplot(faithful, aes (x = eruptions, y = waiting)) +
+  geom_point()
+
+# or layer definition
+ggplot() +
+  geom_point(aes (x = eruptions, y = waiting), faithful)
+```
+
+```{r}
+ggplot(faithful) +
+  geom_point(aes (x = eruptions, y = waiting, color = eruptions < 3))
+```
+
+```{r}
+ggplot(faithful) +
+  geom_point(aes (x = eruptions, y = waiting), color = "steelblue")
+```
+
+## Distribution - geom_hist()
+
+```{r}
+ggplot(faithful) +
+  geom_histogram(aes(eruptions))
+
+ggplot(faithful) +
+  geom_histogram(aes(waiting))
+```
+
+
+
