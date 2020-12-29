@@ -1,2 +1,2 @@
-# Data-Visualization
-Code for Data Visualization Practice
+# Tidyverse-&-Data-Visualization-Practice
+Code for Tidyverse & Data Visualization Practice
