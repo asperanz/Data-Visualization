@@ -34,6 +34,7 @@ Analyses are divided by:
 * datasets
 * graph types
 * tutorials & webinars
+* projects
 
 1. EDA: Analyze the dataset structure, variables distribution and anomalies  
 2. Create visualizations/dashboard
