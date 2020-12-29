@@ -7,8 +7,18 @@ Code for Tidyverse & Data Visualization Practice
 * faithful - https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/faithful
 
 ### Sources
-#### Bookdowns
+#### Books (Bookdown version)
 * **Data Visualization with R** - https://rkabacoff.github.io/datavis/
 * **R for Data Science** - https://r4ds.had.co.nz/data-visualisation.html
 #### Websites
 * **The R Graph Gallery** - https://www.r-graph-gallery.com/index.html
+#### ggplot2 package 
+* **ggplot2** - https://www.r-graph-gallery.com/ggplot2-package.html
+
+## Strategy
+1. EDA: Analyze dataset structure, variables distribution and anomalies  
+2. Create chart/dashboard
+3. Publish charts/dashboards to:
++ blog (
++ twitter
++ Rpubs
