@@ -17,6 +17,8 @@ Code for Tidyverse & Data Visualization Practice
 * **Data Visualization. A practical introduction** - https://socviz.co/index.html#preface
 * **Data Visualization with R** - https://rkabacoff.github.io/datavis/
 * **R for Data Science** - https://r4ds.had.co.nz/
+* **Manipulating, analyzing and exporting data with tidyverse** - https://datacarpentry.org/R-ecology-lesson/03-dplyr.html
+* **Data visualization with ggplot2 (Data Carpentry)** - https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html
 * **Statistical Inference via Data Science. A ModernDive into R and the tidyverse** - https://moderndive.com/index.html
 * **Interactive web-based data visualization with R, plotly, and shiny** - https://plotly-r.com/index.html
 #### Websites
