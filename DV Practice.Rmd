@@ -1,0 +1,62 @@
+---
+title: "DV Practice"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(personograph)
+library(waffle)
+library(extrafont)
+```
+
+# Personograph example
+
+```{r}
+
+```
+
+
+
+# Waffle & Iron example (left-align & padding for multiple plots)
+
+## Example 1
+```{r}
+pain.adult.1997 <- c(`YOY (406)`=406, `Adult (24)`=24)
+
+A <- waffle(pain.adult.1997/2, rows=7, size=0.5, 
+            colors=c("#c7d4b6", "#a3aabd"), 
+            title="Paine Run Brook Trout Abundance (1997)", 
+            xlab="1 square = 2 fish", pad=3)
+
+pine.adult.1997 <- c(`YOY (221)`=221, `Adult (143)`=143)
+
+B <- waffle(pine.adult.1997/2, rows=7, size=0.5, 
+            colors=c("#c7d4b6", "#a3aabd"), 
+            title="Piney River Brook Trout Abundance (1997)", 
+            xlab="1 square = 2 fish", pad=8)
+
+stan.adult.1997 <- c(`YOY (270)`=270, `Adult (197)`=197)
+
+C <- waffle(stan.adult.1997/2, rows=7, size=0.5, 
+            colors=c("#c7d4b6", "#a3aabd"), 
+            title="Staunton River Trout Abundance (1997)", 
+            xlab="1 square = 2 fish")
+
+iron(A, B, C)
+```
+
+## Example 2
+```{r}
+font_import()
+ 
+# check that Font Awesome is imported
+fonts()[grep("Awesome", fonts())]
+# [1] "FontAwesome"
+```
+
+

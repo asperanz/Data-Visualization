@@ -1,0 +1,74 @@
+---
+title: "Exploratory Data Analysis (EDA) - funModeling 1"
+author: "Alessandro Speranza"
+date: "11/12/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+```
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(funModeling)
+library(highcharter)
+```
+
+## R Markdown
+
+```{r}
+ggplot(diamonds, aes(x=carat, y=price, color=cut)) +
+  geom_point(shape=1)
+```
+
+```{r}
+ggplot(diamonds, aes(x = cut, y = price)) +
+  geom_jitter(alpha=1/5, size=1, shape=1, width=0.35, aes(color=carat))
+```
+
+```{r}
+ggplot(diamonds, aes(x = cut, y = price)) +
+  geom_jitter(alpha = 1/5, size = 1, shape = 1, width = 0.35, aes(color = carat)) +
+  geom_violin(alpha = 1/2, color = 'grey50', draw_quantiles = c(.25, .5, .75))
+```
+
+```{r}
+ggplot(diamonds, aes(x = cut, y = price)) +
+  geom_jitter(alpha = 1/5, size = 1, shape = 1, width = 0.35, aes(color = carat)) +
+  geom_violin(alpha = 1/2, color = 'grey50', draw_quantiles = c(.25, .5, .75)) +
+  scale_color_gradient('Diamonds Size', low = '#56B1F7', high = '#c91010')
+```
+
+```{r}
+ggplot(diamonds, aes(x = cut, y = price)) +
+  geom_jitter(alpha = 1/5, size = 1, shape = 1, width = 0.35, aes(color = carat)) +
+  geom_violin(alpha = 1/2, color = 'grey50', draw_quantiles = c(.25, .5, .75)) +
+  scale_color_gradient('Diamonds Size', low = '#56B1F7', high = '#c91010') +
+  scale_y_continuous(labels = scales::dollar)
+```  
+
+```{r}
+ggplot(diamonds, aes(x = cut, y = price)) +
+  geom_jitter(alpha = 1/5, size = 1, shape = 1, width = 0.35, aes(color = carat)) +
+  geom_violin(alpha = 1/2, color = 'grey50', draw_quantiles = c(.25, .5, .75)) +
+  scale_color_gradient('Diamonds Size', low = '#56B1F7', high = '#c91010') +
+  scale_y_continuous(labels = scales::dollar) +
+  labs(c = 'Cut', y = 'Price', title = 'Price vs Cut and Carat')
+```  
+  
+```{r}  
+ggplot(diamonds, aes(x = price, fill = 'red')) +
+  geom_histogram(bins = 30)
+```
+
+```{r}
+# Using highcharter package
+hchart(diamonds$price, color = 'green')
+hchart(diamonds, "point", hcaes(x = carat, y = price, group = cut))
+```
+
+```{r}
+
+```
+

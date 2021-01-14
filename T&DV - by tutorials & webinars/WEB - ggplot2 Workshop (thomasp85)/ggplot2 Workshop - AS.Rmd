@@ -7,7 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library(funModeling)
 library(ggplot2)
 #library(ggrepel)
@@ -59,11 +59,53 @@ ggplot(faithful) +
 
 ```{r}
 ggplot(faithful) +
-  geom_histogram(aes(eruptions))
+  geom_histogram(aes(x = eruptions))
 
 ggplot(faithful) +
-  geom_histogram(aes(waiting))
+  geom_histogram(aes(x = waiting))
 ```
 
+```{r}
+ggplot(faithful, aes(x = eruptions, y = waiting)) +
+  geom_density2d() +
+  geom_point()
+```
 
+#### Exercise 1
+Modify the code below to make the points larger squares and slightly transparent
+```{r}
+ggplot(faithful, aes(x = eruptions, y = waiting)) +
+  geom_point(alpha = 0.5, size = 4)
+```
+
+#### Exercise 2
+Colour the two distributions in the histogram with different colours
+```{r}
+# It works
+ggplot(faithful, aes(x = eruptions)) +
+  geom_histogram(fill = "steelblue")
+
+# It doesn't work
+ggplot(faithful) +
+  geom_histogram(aes(x = eruptions, fill = "steelblue"))
+```
+
+#### Exercise 3
+Colour the distributions in the histogram by whether `waiting` is above or below `60`
+```{r}
+# It works
+ggplot(faithful) +
+  geom_histogram(aes(x = waiting, color = waiting > 60))
+
+# It works
+ggplot(faithful) +
+  geom_histogram(aes(x = waiting, fill = waiting > 60))
+
+ggplot(faithful, position = "dodge") +
+  geom_histogram(aes(x = waiting, fill = waiting > 60.))
+
+# It doesn't work
+ggplot(faithful, aes(x=waiting)) +
+  geom_histogram(fill = waiting > 60)
+```
 
