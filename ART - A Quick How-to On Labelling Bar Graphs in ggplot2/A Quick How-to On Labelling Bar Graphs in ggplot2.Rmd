@@ -1,0 +1,306 @@
+---
+title: "A Quick How-to On Labelling Bar Graphs in ggplot2"
+author: "Alessandro Speranza"
+date: "07/06/2021"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cash = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+# EDA packages
+library(funModeling)
+library(DataExplorer)
+```
+
+Dataset references can be found at [Fuel economy data from 1999 to 2008 for 38 popular models of cars](https://ggplot2.tidyverse.org/reference/mpg.html)
+
+# Check the variables
+
+```{r}
+df_status(mpg)
+```
+
+# Create the dataset
+
+```{r}
+mpg_sum <- mpg %>%
+  # just use 2008 data
+  dplyr::filter(year == 2008)
+
+# Examining the variable 'manufacturer'
+str(mpg_sum$manufacturer)
+# or
+glimpse(mpg_sum$manufacturer)
+
+summary(mpg_sum$manufacturer)
+
+table(mpg_sum$manufacturer) # 15 manufacturers
+
+# factolevels()
+levels(mpg_sum$manufacturer) #NULL because the variable is still a character
+
+
+# EDA
+DataExplorer::plot_bar(mpg_sum$manufacturer)
+```
+
+```{r}
+mpg_sum2 <- mpg %>%
+  # just use 2008 data
+  dplyr::filter(year == 2008) %>% 
+  # turn into lumped factors with capitalized names
+  dplyr::mutate(manufacturer = stringr::str_to_title(manufacturer),
+                manufacturer = forcats::fct_lump(manufacturer, n = 10)
+  )
+
+# Examining the variable manufacturer (factor)
+str(mpg_sum2$manufacturer)
+# or
+glimpse(mpg_sum2$manufacturer)
+
+summary(mpg_sum2$manufacturer)
+
+table(mpg_sum2$manufacturer) # 10 manufacturers + Other (11 factor levels)
+
+# factolevels()
+levels(mpg_sum2$manufacturer)
+
+
+# EDA
+DataExplorer::plot_bar(mpg_sum2$manufacturer)
+```
+
+```{r}
+mpg_sum3 <- mpg %>%
+  # just use 2008 data
+  dplyr::filter(year == 2008) %>% 
+  # turn into lumped factors with capitalized names
+  dplyr::mutate(manufacturer = stringr::str_to_title(manufacturer),
+                manufacturer = forcats::fct_lump(manufacturer, n = 10)
+  ) %>% 
+  # add counts
+  count(manufacturer, sort = TRUE)
+
+mpg_sum3
+
+# factolevels()
+levels(mpg_sum3$manufacturer)
+```
+
+```{r}
+mpg_sum4 <- mpg %>%
+  # just use 2008 data
+  dplyr::filter(year == 2008) %>% 
+  # turn into lumped factors with capitalized names
+  dplyr::mutate(manufacturer = stringr::str_to_title(manufacturer),
+                manufacturer = forcats::fct_lump(manufacturer, n = 10)
+  ) %>% 
+  # add counts
+  count(manufacturer, sort = TRUE) %>% 
+  # order factor levels by number, put "Other" to end
+  dplyr::mutate(manufacturer = forcats::fct_inorder(manufacturer))
+
+mpg_sum4
+
+# factolevels()
+levels(mpg_sum4$manufacturer)
+```
+
+```{r}
+mpg_sum5 <- mpg %>%
+  # just use 2008 data
+  dplyr::filter(year == 2008) %>% 
+  # turn into lumped factors with capitalized names
+  dplyr::mutate(manufacturer = stringr::str_to_title(manufacturer),
+                manufacturer = forcats::fct_lump(manufacturer, n = 10)
+  ) %>% 
+  # add counts
+  count(manufacturer, sort = TRUE) %>% 
+  # order factor levels by number, put "Other" to end
+  dplyr::mutate(manufacturer = forcats::fct_rev(forcats::fct_inorder(manufacturer)))
+
+mpg_sum5
+
+# factolevels()
+levels(mpg_sum5$manufacturer)
+```
+
+```{r}
+mpg_sum6 <- mpg %>%
+  # just use 2008 data
+  dplyr::filter(year == 2008) %>% 
+  # turn into lumped factors with capitalized names
+  dplyr::mutate(manufacturer = stringr::str_to_title(manufacturer),
+                manufacturer = forcats::fct_lump(manufacturer, n = 10)
+  ) %>% 
+  # add counts
+  count(manufacturer, sort = TRUE) %>% 
+  # order factor levels by number, put "Other" to end
+  dplyr::mutate(manufacturer = forcats::fct_rev(forcats::fct_inorder(manufacturer)),
+                manufacturer = forcats::fct_relevel(manufacturer, "Other", after = 0)
+  )
+
+mpg_sum6
+
+# factolevels()
+levels(mpg_sum6$manufacturer)
+
+# Keep in mind that we have reversed the ordering since {ggplot2} plots factors from bottom to top when being mapped to y
+```
+
+# Data Visualization with ggplot2
+
+```{r}
+ggplot(mpg_sum6, aes(x = n, y = manufacturer)) +
+  geom_col(fill = 'steelblue') +
+  theme_minimal()
+```
+
+## Calculate the Percentage Values (Case 1), using a new dataset variable
+
+```{r}
+mpg_sum7 <- mpg_sum6 %>% 
+  dplyr::mutate(perc = stringr::str_c(sprintf("%4.1f", n / sum(n) * 100), "%"))
+
+mpg_sum7
+```
+
+## Calculate the Percentage Values (Case 2), using scales package -\>\> MUCH BETTER!
+
+```{r}
+mpg_sum8 <- mpg_sum6 %>% 
+  dplyr::mutate(perc = scales::percent(n / sum(n), accuracy = .1, trim = FALSE))
+# trim to FALSE is extremely important to right-justified all percentages
+
+mpg_sum8
+```
+
+## Add the prepared percentage label to our bar graph with geom_text()
+
+```{r}
+ggplot(mpg_sum8, aes (x = n, y = manufacturer)) + 
+  geom_col(fill = 'steelblue') +
+  geom_text(aes(label = perc)) + 
+  theme_minimal()
+```
+
+## Add some more description to one of the bars
+
+```{r}
+mpg_sum9 <- mpg_sum6 %>% 
+  dplyr::mutate(perc = scales::percent(n / sum(n), accuracy = .1, trim = FALSE),
+                perc = if_else(row_number() == 1, stringr::str_c(perc, "of all car models", sep = " "), perc))
+
+mpg_sum9
+
+ggplot(mpg_sum9, aes (x = n, y = manufacturer)) + 
+  geom_col(fill = 'steelblue') +
+  geom_text(aes(label = perc)) + 
+  scale_x_continuous(limits = c(NA, 24)) +
+  theme_minimal()
+
+# or
+
+ggplot(mpg_sum9, aes (x = n, y = manufacturer)) + 
+  geom_col(fill = 'steelblue') +
+  geom_text(aes(label = perc)) +
+  # xlim instead of scale_x_continuous(limits) function
+  xlim(NA, 24) +
+  theme_minimal()
+```
+
+## Creating the same bar chart Using geom_bar()
+
+For more info about using geom_bar(), go to [3.7 Statistical transformations](https://r4ds.had.co.nz/data-visualisation.html?q=identity#statistical-transformations)
+
+```{r}
+mpg_fct <- mpg %>% 
+  dplyr::filter(year == 2008) %>%
+  dplyr::mutate(
+    ## add count to calculate percentages later
+    total = dplyr::n(),
+    ## turn into lumped factors with capitalized names
+    manufacturer = stringr::str_to_title(manufacturer),
+    manufacturer = forcats::fct_lump(manufacturer, n = 10),
+    ## order factor levels by number, put "Other" to end
+    manufacturer = forcats::fct_rev(forcats::fct_infreq(manufacturer)),
+    manufacturer = forcats::fct_relevel(manufacturer, "Other", after = 0)
+  )
+
+str(mpg_fct)
+levels(mpg_fct$manufacturer)
+
+# to use geom_bar, data must have the largest granularity (they must not be grouped)
+ggplot(mpg_fct, aes(x = manufacturer)) +
+  geom_bar(fill = "steelblue") +
+  geom_text(stat = "count", 
+            aes(label = ..count..)) +
+  coord_flip() +
+  theme_minimal()
+```
+
+## How to position the percentage labels inside the bars
+
+```{r}
+ggplot(mpg_sum9, aes(x = n, y = manufacturer)) +
+  geom_col(fill = "steelblue") +
+  geom_text(aes(label = perc), 
+  # make labels left-aligned)
+  hjust = 1, nudge_x = -.5 ) +
+  theme_minimal()
+```
+
+## How to position the percentage labels inside the bars and increase space on the right via theme(plot.margin)
+```{r}
+ggplot(mpg_sum9, aes(x = n, y = manufacturer)) +
+  geom_col(fill = "steelblue") +
+  geom_text(aes(label = perc), 
+  # make labels left-aligned)
+  hjust = 0, nudge_x = .5 ) +
+  # make sure labels doesn't get cut, part 1
+  coord_cartesian(clip = "off") +
+  theme_minimal() +
+  ## make sure labels doesn't get cut, part 2
+  theme(plot.margin = margin(r = 120))
+```
+
+## Increase space on the right via scale_x_continuous(limits)
+```{r}
+ggplot(mpg_sum9, aes(x = n, y = manufacturer)) +
+  geom_col(fill = "steelblue") +
+  geom_text(aes(label = perc), 
+  # make labels left-aligned)
+  hjust = 0, nudge_x = .5 ) +
+  # make sure labels doesn't get cut
+  scale_x_continuous(limits = c(NA, 30)) +
+  theme_minimal()
+```
+
+## Increase space on the right via scale_x_continuous(limits)
+```{r}
+ggplot(mpg_sum9, aes(x = n, y = str_c(manufacturer, perc, sep = "  "))) +
+  geom_col(fill = "steelblue") +
+  geom_text(aes(label = perc),
+            hjust = 0, nudge_x = .1) +
+  scale_x_continuous(limits = c(NA, 30)) +
+  theme_minimal()
+
+ggplot(mpg_sum9, aes(x = n, y = manufacturer)) +
+  geom_col(fill = "steelblue") +
+  # geom_text(aes(label = perc),
+  #           hjust = 0, nudge_x = 4) +
+  scale_x_continuous(limits = c(NA, 30)) +
+  # scale_x_reverse() +
+  # scale_y_discrete(guide = guide_axis(position = 'left')) +
+  theme_minimal()
+
+```

@@ -1,0 +1,118 @@
+---
+title: "How to make any plot look better"
+author: "Alessandro Speranza"
+date: "07/03/2021"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cash = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(funModeling)
+library(ggthemr)
+library(extrafont)
+```
+
+Dataset references can be found at [Fuel economy data from 1999 to 2008 for 38 popular models of cars](https://ggplot2.tidyverse.org/reference/mpg.html)
+
+# Check the variables
+```{r}
+df_status(mpg)
+```
+
+<br> **class** = "type" of car  
+**cty** = city miles per gallon 
+<br>
+
+
+```{r}
+ggplot(mpg, aes(x = class, y = cty)) +
+  geom_boxplot(fill = "#6CB2EB", color = "#22292F", alpha = .8) +
+  labs(title = "City fuel consumption by car class",
+       subtitle = str_wrap(paste("Lorem ipsum dolor sit amet,",
+                              "consetetur sadipscing elitr, sed diam",
+                              "nonumy eirmod tempor invidunt ut labore",
+                              "et dolore magna aliquyam erat, sed diam voluptua."), 
+                        width = 80),
+       caption = "Data: ggplot2; Visualization by Christian Burkhart") +
+  theme(panel.background = element_rect(color = "steelblue"),
+        axis.text = element_text(size = rel(1.2))
+  )
+```
+
+<br>
+# Define a theme using ggthemr pkg
+```{r}
+ggthemr("fresh", text_size = 12, layout = "scientific")
+
+ggplot(mpg, aes(x = class, y = cty)) +
+  geom_boxplot(fill = "#6CB2EB", color = "#22292F", alpha = .8) +
+  labs(title = "City fuel consumption by car class",
+       subtitle = str_wrap(paste("Lorem ipsum dolor sit amet,",
+                              "consetetur sadipscing elitr, sed diam",
+                              "nonumy eirmod tempor invidunt ut labore",
+                              "et dolore magna aliquyam erat, sed diam voluptua."), 
+                        width = 80),
+       caption = "Data: ggplot2; Visualization by Christian Burkhart") +
+  theme(panel.background = element_rect(color = "steelblue"),
+        axis.text = element_text(size = rel(1.2))
+  )
+```
+
+# Change the ggplot2 predefined base_size argument
+
+**IMPORTANT**: Both *theme_set* and *theme_minimal* are **ggplot2 functions**
+
+```{r}
+ggplot2::theme_set(ggplot2::theme_minimal (base_size = 13))
+
+ggplot(mpg, aes(x = class, y = cty)) +
+  geom_boxplot(fill = "#6CB2EB", color = "#22292F", alpha = .8) +
+  labs(title = "City fuel consumption by car class",
+       subtitle = str_wrap(paste("Lorem ipsum dolor sit amet,",
+                              "consetetur sadipscing elitr, sed diam",
+                              "nonumy eirmod tempor invidunt ut labore",
+                              "et dolore magna aliquyam erat, sed diam voluptua."), 
+                        width = 80),
+       caption = "Data: ggplot2; Visualization by Christian Burkhart") +
+  theme(panel.background = element_rect(color = "steelblue"),
+        axis.text = element_text(size = rel(1.2))
+  )
+```
+
+# Change the margins around the plot
+```{r}
+theme_set(theme_classic (base_size = 12) +
+  theme(plot.ma = unit(rep(1, 4), "cm")))
+
+ggplot(mpg, aes(x = class, y = cty)) +
+  geom_boxplot(fill = "#6CB2EB", color = "#22292F", alpha = .8) +
+  labs(title = "City fuel consumption by car class",
+       subtitle = str_wrap(paste("Lorem ipsum dolor sit amet,",
+                              "consetetur sadipscing elitr, sed diam",
+                              "nonumy eirmod tempor invidunt ut labore",
+                              "et dolore magna aliquyam erat, sed diam voluptua."), 
+                        width = 80),
+       caption = "Data: ggplot2; Visualization by Christian Burkhart") +
+  theme(panel.background = element_rect(color = "steelblue"),
+        axis.text = element_text(size = rel(1.2))
+  )
+```
+
+# Define new fonts
+```{r}
+font_import()
+```
+# What I learnt
+
+# Next Steps
+
+# Conclusions
